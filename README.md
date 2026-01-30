@@ -6,9 +6,6 @@
 
 This project combines two state-of-the-art methods to enable **zero-shot domain adaptation** of 3D Semantic Scene Completion (SSC) models to adverse weather conditions (fog, rain, snow) using only **text prompts**—no target domain images required during training.
 
-<p align="center">
-  <img src="assets/overview.png" width="800"/>
-</p>
 
 ## 📋 Table of Contents
 
