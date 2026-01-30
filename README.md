@@ -50,36 +50,36 @@ I integrate **PØDA** (Prompt-driven Zero-shot Domain Adaptation) with **MonoSce
 The method consists of three phases:
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        PØDA + MonoScene Pipeline                        │
-├─────────────────────────────────────────────────────────────────────────┤
-│                                                                         │
-│  Phase 1: Source-Only Training                                          │
+┌────────────────────────────────────────────────────────────────────────┐
+│                        PØDA + MonoScene Pipeline                       │
+├────────────────────────────────────────────────────────────────────────┤
+│                                                                        │
+│  Phase 1: Source-Only Training                                         │
 │  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐              │
-│  │  RGB    │───▶│  CLIP   │───▶│  FLoSP  │───▶│  3D     │───▶ SSC     │
+│  │  RGB    │───▶│  CLIP   │───▶│  FLoSP  │───▶│  3D     │───▶ SSC      │
 │  │  Image  │    │  RN50   │    │         │    │  UNet   │    Output    │
 │  └─────────┘    └─────────┘    └─────────┘    └─────────┘              │
-│                                                                         │
-│  Phase 2: Style Mining (Offline)                                        │
+│                                                                        │
+│  Phase 2: Style Mining (Offline)                                       │
 │  ┌─────────────────────────────────────────────────────────────────┐   │
 │  │  For each target prompt ("driving in fog", "driving in rain"):  │   │
-│  │  • Extract Layer1 features from source images                    │   │
+│  │  • Extract Layer1 features from source images                   │   │
 │  │  • Optimize (μ, σ) to minimize cosine distance to text embedding│   │
-│  │  • Store mined styles in style bank                              │   │
+│  │  • Store mined styles in style bank                             │   │
 │  └─────────────────────────────────────────────────────────────────┘   │
-│                                                                         │
-│  Phase 3: Zero-Shot Adaptation                                          │
+│                                                                        │
+│  Phase 3: Zero-Shot Adaptation                                         │
 │  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐              │
-│  │  RGB    │───▶│  CLIP   │───▶│   PIN   │───▶│  Rest   │───▶ SSC     │
+│  │  RGB    │───▶│  CLIP   │───▶│   PIN   │───▶│  Rest   │───▶ SSC      │
 │  │  Image  │    │ Layer1  │    │  Layer  │    │  of Net │    Output    │
 │  └─────────┘    └─────────┘    └─────────┘    └─────────┘              │
-│                      │              ▲                                   │
-│                      │              │ Sample random style               │
-│                      │         ┌────┴────┐                              │
-│                      └────────▶│  Style  │                              │
-│                                │  Bank   │                              │
-│                                └─────────┘                              │
-└─────────────────────────────────────────────────────────────────────────┘
+│                      │              ▲                                  │
+│                      │              │ Sample random style              │
+│                      │         ┌────┴────┐                             │
+│                      └────────▶│  Style  │                             │
+│                                │  Bank   │                             │
+│                                └─────────┘                             │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Prompt-driven Instance Normalization (PIN)
